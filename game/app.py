@@ -149,6 +149,7 @@ def configure(launch_id, difficulty):
         .set_title('Breakout ' + difficulty + ' mode!')
 
     html = message_launch.get_deep_link().output_response_form([resource])
+    print(html)
     return html
 
 
