@@ -1,10 +1,10 @@
 {
     "http://imsglobal.org": [{
         "default": true,
-        "client_id": "pytest12345",
-        "auth_login_url": "https://lti-ri.imsglobal.org/platforms/370/authorizations/new",
-        "auth_token_url": "https://lti-ri.imsglobal.org/platforms/370/access_tokens",
-        "key_set_url": "https://lti-ri.imsglobal.org/platforms/370/platform_keys/361.json",
+        "client_id": "voteamerica-test",
+        "auth_login_url": "https://lti-ri.imsglobal.org/platforms/2992/authorizations/new",
+        "auth_token_url": "https://lti-ri.imsglobal.org/platforms/2992/access_tokens",
+        "key_set_url": "https://lti-ri.imsglobal.org/platforms/2992/platform_keys/2765.json",
         "key_set": {
             "keys": [
                 {
@@ -54,14 +54,13 @@
     }],
     "https://blackboard.com": [{
         "default": true,
-        "client_id": "client-id",
+        "client_id": "82b10b0f-ad48-45bf-b9ae-fbc1e4143530",
         "auth_login_url": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
         "auth_token_url": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
-        "key_set_url": "https://developer.blackboard.com/api/v1/management/applications/<your client id>/jwks.json",
+        "key_set_url": "https://developer.blackboard.com/api/v1/management/applications/82b10b0f-ad48-45bf-b9ae-fbc1e4143530/jwks.json",
         "key_set": null,
         "private_key_file": "private.key",
-        "public_key_file": "public.key",
-        "deployment_ids": ["deployment-id"]
+        "deployment_ids": ["f505b3f9-9a2f-41eb-87c2-4f9454c84efb"]
     }],
     "https://partners.brightspace.com": [{
         "default": true,
