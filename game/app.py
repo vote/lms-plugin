@@ -2,7 +2,7 @@ import os
 import pprint
 
 from tempfile import mkdtemp
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, render_template
 from flask_caching import Cache
 from flask_debugtoolbar import DebugToolbarExtension
 from pylti1p3.contrib.flask import FlaskOIDCLogin, FlaskMessageLaunch, FlaskRequest, FlaskCacheDataStorage
@@ -41,8 +41,6 @@ config = {
 app.config.from_mapping(config)
 cache = Cache(app)
 toolbar = DebugToolbarExtension(app)
-
-PAGE_TITLE = 'Game Example'
 
 
 class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):
@@ -103,20 +101,7 @@ def launch():
     message_launch_data = message_launch.get_launch_data()
     pprint.pprint(message_launch_data)
 
-    difficulty = message_launch_data.get('https://purl.imsglobal.org/spec/lti/claim/custom', {}) \
-        .get('difficulty', None)
-    if not difficulty:
-        difficulty = request.args.get('difficulty', 'normal')
-
-    tpl_kwargs = {
-        'page_title': PAGE_TITLE,
-        'is_deep_link_launch': message_launch.is_deep_link_launch(),
-        'launch_data': message_launch.get_launch_data(),
-        'launch_id': message_launch.get_launch_id(),
-        'curr_user_name': message_launch_data.get('name', ''),
-        'curr_diff': difficulty
-    }
-    return render_template('game.html', **tpl_kwargs)
+    return render_template('game.html', launch_data=message_launch_data)
 
 
 @app.route('/jwks/', methods=['GET'])
