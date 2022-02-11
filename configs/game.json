@@ -60,6 +60,7 @@
         "key_set_url": "https://developer.blackboard.com/api/v1/management/applications/82b10b0f-ad48-45bf-b9ae-fbc1e4143530/jwks.json",
         "key_set": null,
         "private_key_file": "private.key",
+        "public_key_file": "public.key",
         "deployment_ids": ["f505b3f9-9a2f-41eb-87c2-4f9454c84efb"]
     }],
     "https://partners.brightspace.com": [{
