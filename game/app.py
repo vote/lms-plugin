@@ -30,7 +30,7 @@ app = Flask('pylti1p3-game-example', template_folder='templates', static_folder=
 app.wsgi_app = ReverseProxied(app.wsgi_app)
 
 config = {
-    "DEBUG": True,
+    "DEBUG": False,
     "ENV": "development",
     "CACHE_TYPE": "simple",
     "CACHE_DEFAULT_TIMEOUT": 600,
