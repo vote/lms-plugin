@@ -123,6 +123,10 @@ def launch():
     }
     return render_template('game.html', **tpl_kwargs)
 
+@app.after_request
+def after_req(response):
+    print(response.headers)
+    return response
 
 @app.route('/jwks/', methods=['GET'])
 def get_jwks():
