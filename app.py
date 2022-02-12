@@ -22,7 +22,7 @@ class ReverseProxied(object):
         return self.app(environ, start_response)
 
 
-app = Flask('pylti1p3-game-example', template_folder='templates', static_folder='static')
+app = Flask(__name__)
 app.wsgi_app = ReverseProxied(app.wsgi_app)
 
 config = {
@@ -61,7 +61,7 @@ class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):
 
 
 def get_lti_config_path():
-    return os.path.join(app.root_path, '..', 'configs', 'game.json')
+    return os.path.join(app.root_path, 'configs', 'lti.json')
 
 
 def get_launch_data_storage():
@@ -69,7 +69,7 @@ def get_launch_data_storage():
 
 
 def get_jwk_from_public_key(key_name):
-    key_path = os.path.join(app.root_path, '..', 'configs', key_name)
+    key_path = os.path.join(app.root_path, 'configs', key_name)
     f = open(key_path, 'r')
     key_content = f.read()
     jwk = Registration.get_jwk(key_content)
@@ -107,7 +107,7 @@ def launch():
         'last_name': message_launch_data.get('family_name', ''),
         'email': message_launch_data.get('email', ''),
     })
-    return render_template('game.html', query=query)
+    return render_template('index.html', query=query)
 
 
 @app.route('/jwks/', methods=['GET'])

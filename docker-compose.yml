@@ -1,14 +1,13 @@
 version: '3'
 services:
-  game:
+  app:
     restart: always
-    container_name: pylti1p3-flask-example
     build: .
     stdin_open: true
     tty: true
     volumes:
       - ./configs:/configs
-      - ./game:/game
-    working_dir: /game
+      - .:/app
+    working_dir: /app
     ports:
       - "9001:9001"
