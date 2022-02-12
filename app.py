@@ -24,17 +24,11 @@ app = Flask(__name__)
 app.wsgi_app = ReverseProxied(app.wsgi_app)
 
 config = {
-    "DEBUG": False,
-    "ENV": "development",
     "CACHE_TYPE": "simple",
     "CACHE_DEFAULT_TIMEOUT": 600,
     "SECRET_KEY": "replace-me",
     "SESSION_TYPE": "filesystem",
-    "SESSION_FILE_DIR": mkdtemp(),
-    "SESSION_COOKIE_NAME": "flask-session-id",
-    "SESSION_COOKIE_HTTPONLY": True,
-    "SESSION_COOKIE_SECURE": False,   # should be True in case of HTTPS usage (production)
-    "SESSION_COOKIE_SAMESITE": None  # should be 'None' in case of HTTPS usage (production)
+    "SESSION_FILE_DIR": mkdtemp()
 }
 app.config.from_mapping(config)
 cache = Cache(app)
