@@ -2,6 +2,7 @@ import os
 import pprint
 
 from tempfile import mkdtemp
+from urllib.parse import urlencode
 from flask import Flask, jsonify, render_template
 from flask_caching import Cache
 from flask_debugtoolbar import DebugToolbarExtension
@@ -101,7 +102,12 @@ def launch():
     message_launch_data = message_launch.get_launch_data()
     pprint.pprint(message_launch_data)
 
-    return render_template('game.html', launch_data=message_launch_data)
+    query = urlencode({
+        'first_name': message_launch_data.get('given_name', ''),
+        'last_name': message_launch_data.get('family_name', ''),
+        'email': message_launch_data.get('email', ''),
+    })
+    return render_template('game.html', query=query)
 
 
 @app.route('/jwks/', methods=['GET'])

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Register to Vote - VoteAmerica</title>
     <script>
-      // the embed code pulls pre-filling information from the query string
+      // the embed code pulls pre-filling information from the query string, so append if possible
       if (history.pushState) {
         var existingUrl =
           window.location.protocol +
@@ -12,10 +12,7 @@
           window.location.host +
           window.location.pathname;
 
-        var newurl =
-          existingUrl +
-          "?first_name=" +
-          encodeURIComponent("{{ launch_data.get('given_name', '') }}");
+        var newurl = existingUrl + "?" + "{{query}}";
         window.history.pushState({ path: newurl }, "", newurl);
       }
     </script>
@@ -28,6 +25,5 @@
       data-subscriber="public"
       data-tool="register"
     ></div>
-    <!-- https://www.voteamerica.com/embed/register/?embed_id=wfw854kzks&embed_page_url=https%3A%2F%2Fva-pylti.herokuapp.com%2Flaunch%2F&subscriber=public&first_name=Test -->
   </body>
 </html>
