@@ -28,16 +28,15 @@ config = {
 app.config.from_mapping(config)
 cache = Cache(app)
 
+lti_config_path = os.path.join(app.root_path, "configs", "lti.json")
+tool_conf = ToolConfJsonFile(lti_config_path)
+
 
 class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):
     # ignore the deployment ID
     # https://github.com/dmitry-viskov/pylti1.3/issues/2#issuecomment-524109023
     def validate_deployment(self):
         return self
-
-
-def get_lti_config_path():
-    return os.path.join(app.root_path, "configs", "lti.json")
 
 
 def get_launch_data_storage():
@@ -55,7 +54,6 @@ def get_jwk_from_public_key(key_name):
 
 @app.route("/login/", methods=["GET", "POST"])
 def login():
-    tool_conf = ToolConfJsonFile(get_lti_config_path())
     launch_data_storage = get_launch_data_storage()
 
     flask_request = FlaskRequest()
@@ -71,7 +69,6 @@ def login():
 
 @app.route("/launch/", methods=["POST"])
 def launch():
-    tool_conf = ToolConfJsonFile(get_lti_config_path())
     flask_request = FlaskRequest()
     launch_data_storage = get_launch_data_storage()
     message_launch = ExtendedFlaskMessageLaunch(
@@ -91,7 +88,6 @@ def launch():
 
 @app.route("/jwks/", methods=["GET"])
 def get_jwks():
-    tool_conf = ToolConfJsonFile(get_lti_config_path())
     return jsonify({"keys": tool_conf.get_jwks()})
 
 
