@@ -4,7 +4,6 @@ from tempfile import mkdtemp
 from urllib.parse import urlencode
 from flask import Flask, jsonify, render_template
 from flask_caching import Cache
-from flask_debugtoolbar import DebugToolbarExtension
 from pylti1p3.contrib.flask import FlaskOIDCLogin, FlaskMessageLaunch, FlaskRequest, FlaskCacheDataStorage
 from pylti1p3.tool_config import ToolConfJsonFile
 from pylti1p3.registration import Registration
@@ -35,12 +34,10 @@ config = {
     "SESSION_COOKIE_NAME": "flask-session-id",
     "SESSION_COOKIE_HTTPONLY": True,
     "SESSION_COOKIE_SECURE": False,   # should be True in case of HTTPS usage (production)
-    "SESSION_COOKIE_SAMESITE": None,  # should be 'None' in case of HTTPS usage (production)
-    "DEBUG_TB_INTERCEPT_REDIRECTS": False
+    "SESSION_COOKIE_SAMESITE": None  # should be 'None' in case of HTTPS usage (production)
 }
 app.config.from_mapping(config)
 cache = Cache(app)
-toolbar = DebugToolbarExtension(app)
 
 
 class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):
