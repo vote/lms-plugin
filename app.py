@@ -7,21 +7,11 @@ from flask_caching import Cache
 from pylti1p3.contrib.flask import FlaskOIDCLogin, FlaskMessageLaunch, FlaskRequest, FlaskCacheDataStorage
 from pylti1p3.tool_config import ToolConfJsonFile
 from pylti1p3.registration import Registration
-
-
-class ReverseProxied(object):
-    def __init__(self, app):
-        self.app = app
-
-    def __call__(self, environ, start_response):
-        scheme = environ.get('HTTP_X_FORWARDED_PROTO')
-        if scheme:
-            environ['wsgi.url_scheme'] = scheme
-        return self.app(environ, start_response)
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 app = Flask(__name__)
-app.wsgi_app = ReverseProxied(app.wsgi_app)
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 config = {
     "CACHE_TYPE": "simple",
@@ -35,7 +25,6 @@ cache = Cache(app)
 
 
 class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):
-
     # ignore the deployment ID
     # https://github.com/dmitry-viskov/pylti1.3/issues/2#issuecomment-524109023
     def validate_deployment(self):
