@@ -61,7 +61,7 @@
         "key_set": null,
         "private_key_file": "private.key",
         "public_key_file": "public.key",
-        "deployment_ids": ["f505b3f9-9a2f-41eb-87c2-4f9454c84efb"]
+        "deployment_ids": ["f505b3f9-9a2f-41eb-87c2-4f9454c84efb", "9a357013-8bfc-4f74-af24-be388f886910"]
     }],
     "https://partners.brightspace.com": [{
         "default": true,
