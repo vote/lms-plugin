@@ -19,7 +19,7 @@
         },
         "private_key_file": "private.key",
         "public_key_file": "public.key",
-        "deployment_ids": ["py1234"]
+        "deployment_ids": ["IGNORED"]
     }],
     "https://canvas.instructure.com": [{
         "default": true,
@@ -30,7 +30,7 @@
         "key_set": null,
         "private_key_file": "private.key",
         "public_key_file": "public.key",
-        "deployment_ids": ["2:4dde05e8ca1973bcca9bffc13e1548820eee93a3"]
+        "deployment_ids": ["IGNORED"]
     }, {
         "client_id": "10000000000004",
         "auth_login_url": "http://canvas.test/api/lti/authorize_redirect",
@@ -39,7 +39,7 @@
         "key_set": null,
         "private_key_file": "private.key",
         "public_key_file": "public.key",
-        "deployment_ids": ["3:4dde05e8ca1973bcca9bffc13e1548820eee93a3"]
+        "deployment_ids": ["IGNORED"]
     }],
     "ltiadvantagevalidator.imsglobal.org": [{
         "default": true,
@@ -50,7 +50,7 @@
         "key_set": null,
         "private_key_file": "cert_suite_private.key",
         "public_key_file": null,
-        "deployment_ids": ["testdeploy"]
+        "deployment_ids": ["IGNORED"]
     }],
     "https://blackboard.com": [{
         "default": true,
@@ -61,7 +61,7 @@
         "key_set": null,
         "private_key_file": "private.key",
         "public_key_file": "public.key",
-        "deployment_ids": ["f505b3f9-9a2f-41eb-87c2-4f9454c84efb", "9a357013-8bfc-4f74-af24-be388f886910"]
+        "deployment_ids": ["IGNORED"]
     }],
     "https://partners.brightspace.com": [{
         "default": true,
@@ -73,6 +73,6 @@
         "key_set": null,
         "private_key_file": "private2.key",
         "public_key_file": "public2.key",
-        "deployment_ids": ["deployment-id"]
+        "deployment_ids": ["IGNORED"]
     }]
 }

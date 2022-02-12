@@ -59,6 +59,11 @@ class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):
             return self
         return super(ExtendedFlaskMessageLaunch, self).validate_nonce()
 
+    # ignore the deployment ID
+    # https://github.com/dmitry-viskov/pylti1.3/issues/2#issuecomment-524109023
+    def validate_deployment(self):
+        return self
+
 
 def get_lti_config_path():
     return os.path.join(app.root_path, 'configs', 'lti.json')
