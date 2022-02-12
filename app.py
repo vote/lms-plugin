@@ -1,5 +1,4 @@
 import os
-import pprint
 
 from tempfile import mkdtemp
 from urllib.parse import urlencode
@@ -45,19 +44,6 @@ toolbar = DebugToolbarExtension(app)
 
 
 class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):
-
-    def validate_nonce(self):
-        """
-        Probably it is bug on "https://lti-ri.imsglobal.org":
-        site passes invalid "nonce" value during deep links launch.
-        Because of this in case of iss == http://imsglobal.org just skip nonce validation.
-
-        """
-        iss = self.get_iss()
-        deep_link_launch = self.is_deep_link_launch()
-        if iss == "http://imsglobal.org" and deep_link_launch:
-            return self
-        return super(ExtendedFlaskMessageLaunch, self).validate_nonce()
 
     # ignore the deployment ID
     # https://github.com/dmitry-viskov/pylti1.3/issues/2#issuecomment-524109023
@@ -105,7 +91,6 @@ def launch():
     launch_data_storage = get_launch_data_storage()
     message_launch = ExtendedFlaskMessageLaunch(flask_request, tool_conf, launch_data_storage=launch_data_storage)
     message_launch_data = message_launch.get_launch_data()
-    pprint.pprint(message_launch_data)
 
     query = urlencode({
         'first_name': message_launch_data.get('given_name', ''),
