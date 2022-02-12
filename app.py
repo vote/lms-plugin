@@ -1,3 +1,4 @@
+import json
 import os
 
 from tempfile import mkdtemp
@@ -10,26 +11,45 @@ from pylti1p3.contrib.flask import (
     FlaskRequest,
     FlaskCacheDataStorage,
 )
-from pylti1p3.tool_config import ToolConfJsonFile
+from pylti1p3.tool_config import ToolConfDict
 from pylti1p3.registration import Registration
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 
-app = Flask(__name__)
-app.wsgi_app = ProxyFix(app.wsgi_app)
+def get_app():
+    app = Flask(__name__)
+    app.wsgi_app = ProxyFix(app.wsgi_app)
 
-config = {
-    "CACHE_TYPE": "simple",
-    "CACHE_DEFAULT_TIMEOUT": 600,
-    "SECRET_KEY": "replace-me",
-    "SESSION_TYPE": "filesystem",
-    "SESSION_FILE_DIR": mkdtemp(),
-}
-app.config.from_mapping(config)
+    config = {
+        "CACHE_TYPE": "simple",
+        "CACHE_DEFAULT_TIMEOUT": 600,
+        "SESSION_TYPE": "filesystem",
+        "SESSION_FILE_DIR": mkdtemp(),
+    }
+    app.config.from_mapping(config)
+
+    return app
+
+
+def get_tool_conf():
+    lti_config_path = os.path.join(app.root_path, "configs", "lti.json")
+    config = json.load(open(lti_config_path))
+    tool_conf = ToolConfDict(config)
+
+    public_key = os.environ["PUBLIC_KEY"]
+    private_key = os.environ["PRIVATE_KEY"]
+
+    for iss, clients in tool_conf._config.items():
+        for client in clients:
+            tool_conf.set_public_key(iss, public_key, client_id=client["client_id"])
+            tool_conf.set_private_key(iss, private_key, client_id=client["client_id"])
+
+    return tool_conf
+
+
+app = get_app()
 cache = Cache(app)
-
-lti_config_path = os.path.join(app.root_path, "configs", "lti.json")
-tool_conf = ToolConfJsonFile(lti_config_path)
+tool_conf = get_tool_conf()
 
 
 class ExtendedFlaskMessageLaunch(FlaskMessageLaunch):

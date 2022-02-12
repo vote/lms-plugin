@@ -4,11 +4,21 @@ This is a plugin to show the [VoteAmerica voter registration form](https://www.v
 
 ## Local setup
 
-While the app isn't super useful to run locally (an LMS provider needs to be able to access it), you can do so with:
+While the app isn't super useful to run locally (an LMS provider needs to be able to access it), you can do so with the following steps:
 
-```sh
-docker-compose up --build
-```
+1. Make a file for environment variables.
+
+   ```sh
+   cp .env.sample .env
+   ```
+
+1. [Generate a key](https://github.com/dmitry-viskov/pylti1.3/wiki/How-to-generate-JWT-RS256-key-and-JWKS).
+1. In the `.env` file, put the contents of the `jwtRS256.key.pub` into `PUBLIC_KEY` and `jwtRS256.key` into `PRIVATE_KEY`.
+1. Start the server.
+
+   ```sh
+   docker-compose up --build
+   ```
 
 ## Blackboard
 

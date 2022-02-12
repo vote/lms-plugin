@@ -18,8 +18,8 @@
           }
         ]
       },
-      "private_key_file": "private.key",
-      "public_key_file": "public.key",
+      "private_key_file": null,
+      "public_key_file": null,
       "deployment_ids": ["IGNORED"]
     }
   ],
@@ -31,8 +31,8 @@
       "auth_token_url": "http://canvas.test/login/oauth2/token",
       "key_set_url": "http://canvas.test/api/lti/security/jwks",
       "key_set": null,
-      "private_key_file": "private.key",
-      "public_key_file": "public.key",
+      "private_key_file": null,
+      "public_key_file": null,
       "deployment_ids": ["IGNORED"]
     },
     {
@@ -41,8 +41,8 @@
       "auth_token_url": "http://canvas.test/login/oauth2/token",
       "key_set_url": "http://canvas.test/api/lti/security/jwks",
       "key_set": null,
-      "private_key_file": "private.key",
-      "public_key_file": "public.key",
+      "private_key_file": null,
+      "public_key_file": null,
       "deployment_ids": ["IGNORED"]
     }
   ],
@@ -54,7 +54,7 @@
       "auth_token_url": "https://oauth2server.imsglobal.org/oauth2server/authcodejwt",
       "key_set_url": "https://oauth2server.imsglobal.org/jwks",
       "key_set": null,
-      "private_key_file": "cert_suite_private.key",
+      "private_key_file": null,
       "public_key_file": null,
       "deployment_ids": ["IGNORED"]
     }
@@ -67,8 +67,8 @@
       "auth_token_url": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
       "key_set_url": "https://developer.blackboard.com/api/v1/management/applications/82b10b0f-ad48-45bf-b9ae-fbc1e4143530/jwks.json",
       "key_set": null,
-      "private_key_file": "private.key",
-      "public_key_file": "public.key",
+      "private_key_file": null,
+      "public_key_file": null,
       "deployment_ids": ["IGNORED"]
     }
   ],
@@ -81,8 +81,8 @@
       "auth_audience": "https://api.brightspace.com/auth/token",
       "key_set_url": "https://partners.brightspace.com/d2l/.well-known/jwks",
       "key_set": null,
-      "private_key_file": "private.key",
-      "public_key_file": "public.key",
+      "private_key_file": null,
+      "public_key_file": null,
       "deployment_ids": ["IGNORED"]
     }
   ]

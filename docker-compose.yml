@@ -11,3 +11,6 @@ services:
     working_dir: /app
     ports:
       - "9001:9001"
+    environment:
+      - PUBLIC_KEY
+      - PRIVATE_KEY
