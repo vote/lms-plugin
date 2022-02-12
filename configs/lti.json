@@ -71,8 +71,8 @@
         "auth_audience": "https://api.brightspace.com/auth/token",
         "key_set_url": "https://partners.brightspace.com/d2l/.well-known/jwks",
         "key_set": null,
-        "private_key_file": "private2.key",
-        "public_key_file": "public2.key",
+        "private_key_file": "private.key",
+        "public_key_file": "public.key",
         "deployment_ids": ["IGNORED"]
     }]
 }
