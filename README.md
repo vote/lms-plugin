@@ -29,7 +29,10 @@ The Tool is [centrally registered](https://docs.blackboard.com/lti/lti-registrat
 To add to [Canvas](https://www.instructure.com/canvas):
 
 1. [Configure an LTI key](https://community.canvaslms.com/t5/Admin-Guide/How-do-I-configure-an-LTI-key-for-an-account/ta-p/140)
-   1. Under `Method`, select `Enter URL`, then fill `JSON URL` with `https://va-pylti.herokuapp.com/config/canvas.json`
+   1. For `Key Name`, enter `VoteAmerica`
+   1. Under `Method`, select `Enter URL`
+   1. Fill `JSON URL` with `https://va-pylti.herokuapp.com/config/canvas.json`
+   1. Click `Save`
    1. Turn `State` to `ON`
    1. Under `Details`, copy the Client ID
 1. [Add the External App](https://community.canvaslms.com/t5/Admin-Guide/How-do-I-configure-an-external-app-for-an-account-using-a-client/ta-p/202)

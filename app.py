@@ -3,7 +3,7 @@ import os
 
 from tempfile import mkdtemp
 from urllib.parse import urlencode
-from flask import Flask, jsonify, render_template, url_for
+from flask import Flask, jsonify, render_template, request, url_for
 from flask_caching import Cache
 from pylti1p3.contrib.flask import (
     FlaskOIDCLogin,
@@ -114,6 +114,7 @@ def get_jwks():
 # https://canvas.instructure.com/doc/api/file.lti_dev_key_config.html#configuring-the-tool-in-canvas
 @app.route("/config/canvas.json", methods=["GET"])
 def canvas_config():
+    target_link_uri = url_for("launch", _external=True)
     icon_url = "https://www.voteamerica.com/img/apple-touch-icon.png"
 
     return jsonify(
@@ -121,17 +122,22 @@ def canvas_config():
             "title": "VoteAmerica",
             "description": "Register to vote",
             "oidc_initiation_url": url_for("login", _external=True),
-            "target_link_uri": url_for("launch", _external=True),
+            "target_link_uri": target_link_uri,
             "extensions": [
                 {
+                    "domain": request.host,
+                    "tool_id": "voteamerica",
+                    "platform": "canvas.instructure.com",
                     "privacy_level": "public",
                     "settings": {
                         "text": "VoteAmerica",
                         "icon_url": icon_url,
                         "placements": [
                             {
+                                "text": "VoteAmerica",
                                 "placement": "user_navigation",
                                 "message_type": "LtiResourceLinkRequest",
+                                "target_link_uri": target_link_uri,
                                 "canvas_icon_class": "icon-lti",
                             }
                         ],
