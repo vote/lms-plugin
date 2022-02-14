@@ -114,14 +114,32 @@ def get_jwks():
 # https://canvas.instructure.com/doc/api/file.lti_dev_key_config.html#configuring-the-tool-in-canvas
 @app.route("/config/canvas.json", methods=["GET"])
 def canvas_config():
+    icon_url = "https://www.voteamerica.com/img/apple-touch-icon.png"
+
     return jsonify(
         {
             "title": "VoteAmerica",
             "description": "Register to vote",
             "oidc_initiation_url": url_for("login", _external=True),
             "target_link_uri": url_for("launch", _external=True),
+            "extensions": [
+                {
+                    "privacy_level": "public",
+                    "settings": {
+                        "text": "VoteAmerica",
+                        "icon_url": icon_url,
+                        "placements": [
+                            {
+                                "placement": "user_navigation",
+                                "message_type": "LtiResourceLinkRequest",
+                                "canvas_icon_class": "icon-lti",
+                            }
+                        ],
+                    },
+                }
+            ],
             "privacy_level": "public",
-            "icon_url": "https://www.voteamerica.com/img/apple-touch-icon.png",
+            "icon_url": icon_url,
             "public_jwk_url": url_for("get_jwks", _external=True),
         }
     )
