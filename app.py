@@ -123,6 +123,10 @@ def canvas_config():
             "description": "Register to vote",
             "oidc_initiation_url": url_for("login", _external=True),
             "target_link_uri": target_link_uri,
+            "scopes": [
+                "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem",
+                "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly",
+            ],
             "extensions": [
                 {
                     "domain": request.host,
