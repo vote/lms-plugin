@@ -3,7 +3,7 @@ import os
 
 from tempfile import mkdtemp
 from urllib.parse import urlencode
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, url_for
 from flask_caching import Cache
 from pylti1p3.contrib.flask import (
     FlaskOIDCLogin,
@@ -109,6 +109,22 @@ def launch():
 @app.route("/jwks/", methods=["GET"])
 def get_jwks():
     return jsonify({"keys": tool_conf.get_jwks()})
+
+
+# https://canvas.instructure.com/doc/api/file.lti_dev_key_config.html#configuring-the-tool-in-canvas
+@app.route("/config/canvas.json", methods=["GET"])
+def canvas_config():
+    return jsonify(
+        {
+            "title": "VoteAmerica",
+            "description": "Register to vote",
+            "oidc_initiation_url": url_for("login", _external=True),
+            "target_link_uri": url_for("launch", _external=True),
+            "privacy_level": "public",
+            "icon_url": "https://www.voteamerica.com/img/apple-touch-icon.png",
+            "public_jwk_url": url_for("get_jwks", _external=True),
+        }
+    )
 
 
 if __name__ == "__main__":
