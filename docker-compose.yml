@@ -6,9 +6,8 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./configs:/configs
-      - ./src:/app
-    working_dir: /app
+      - .:/app
+    working_dir: /app/src
     ports:
       - "9001:9001"
     environment:

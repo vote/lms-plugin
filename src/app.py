@@ -21,7 +21,7 @@ def get_app():
     app.wsgi_app = ProxyFix(app.wsgi_app)
 
     config = {
-        "CACHE_TYPE": "simple",
+        "CACHE_TYPE": "SimpleCache",
         "CACHE_DEFAULT_TIMEOUT": 600,
         "SESSION_TYPE": "filesystem",
         "SESSION_FILE_DIR": mkdtemp(),
@@ -72,6 +72,10 @@ def get_jwk_from_public_key(key_name):
     return jwk
 
 
+def external_url(endpoint):
+    return url_for(endpoint, _external=True, _scheme="https")
+
+
 @app.route("/login/", methods=["GET", "POST"])
 def login():
     launch_data_storage = get_launch_data_storage()
@@ -114,14 +118,14 @@ def get_jwks():
 # https://canvas.instructure.com/doc/api/file.lti_dev_key_config.html#configuring-the-tool-in-canvas
 @app.route("/config/canvas.json", methods=["GET"])
 def canvas_config():
-    target_link_uri = url_for("launch", _external=True)
+    target_link_uri = external_url("launch")
     icon_url = "https://www.voteamerica.com/img/apple-touch-icon.png"
 
     return jsonify(
         {
             "title": "VoteAmerica",
             "description": "Register to vote",
-            "oidc_initiation_url": url_for("login", _external=True),
+            "oidc_initiation_url": external_url("login"),
             "target_link_uri": target_link_uri,
             "scopes": [
                 "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem",
@@ -150,7 +154,7 @@ def canvas_config():
             ],
             "privacy_level": "public",
             "icon_url": icon_url,
-            "public_jwk_url": url_for("get_jwks", _external=True),
+            "public_jwk_url": external_url("get_jwks"),
         }
     )
 

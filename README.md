@@ -17,14 +17,16 @@ While the app isn't super useful to run locally (an LMS provider needs to be abl
 1. Start the server.
 
    ```sh
-   docker-compose up --build
+   docker compose up --build
    ```
 
-## Blackboard
+## LMS setup
+
+### Blackboard
 
 The Tool is [centrally registered](https://docs.blackboard.com/lti/lti-registration-and-deployment) as a [System placement](https://docs.blackboard.com/lti/getting-started-with-lti#lti-placements). To [register with a Blackboard Learn instance](https://help.blackboard.com/Learn/Administrator/SaaS/Integrations/Learning_Tools_Interoperability#addlti13), use the [`Application ID`](https://developer.blackboard.com/portal/applications) as the `Client ID`.
 
-## Canvas
+### Canvas
 
 To add to [Canvas](https://www.instructure.com/canvas):
 
@@ -36,3 +38,9 @@ To add to [Canvas](https://www.instructure.com/canvas):
    1. Turn `State` to `ON`
    1. Under `Details`, copy the Client ID
 1. [Add the External App](https://community.canvaslms.com/t5/Admin-Guide/How-do-I-configure-an-external-app-for-an-account-using-a-client/ta-p/202)
+
+## Running tests
+
+```sh
+docker compose run -w /app app pytest
+```
