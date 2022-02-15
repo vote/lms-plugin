@@ -10,4 +10,5 @@ RUN pip install --upgrade pip
 RUN pip install -r /tmp/requirements.txt
 
 EXPOSE 9001
+ENV FLASK_ENV development
 CMD python app.py
