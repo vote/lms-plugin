@@ -6,6 +6,7 @@ This is a plugin to show the [VoteAmerica voter registration form](https://www.v
 
 While the app isn't super useful to run locally (an LMS provider needs to be able to access it), you can do so with the following steps:
 
+1. [Install Docker.](https://docs.docker.com/get-docker/)
 1. Make a file for environment variables.
 
    ```sh
@@ -19,6 +20,10 @@ While the app isn't super useful to run locally (an LMS provider needs to be abl
    ```sh
    docker compose up --build
    ```
+
+1. To get a publicly-accessible URL for hosted LMSes (not running on your machine) to interact with, try using [Localtunnel](https://localtunnel.github.io/www/).
+   - You may want to pick a stable subdomain (with `--subdomain`) so that you don't have to modify your registrations each time.
+   - Use this hostname instead of the Heroku ones below.
 
 ## LMS setup
 
